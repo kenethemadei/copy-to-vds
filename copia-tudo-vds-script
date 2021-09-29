@@ -1,0 +1,48 @@
+#!/bin/bash
+echo "Bem vindo ao Script de cópia de arquivos para as VDS's!"
+sleep 2
+
+echo "Feito por KENETH ALVES!"
+sleep 2
+
+echo -n "Digite o diretório e arquivo que deseja copiar: "
+read ORIGEM
+sleep 2
+
+echo -n "Digite o destino que deseja enviar o arquivo dentro dos diretórios das VDS's: "
+read DESTINO
+sleep 2
+
+echo "Digite de qual VDS até qual VDS você deseja copiar este arquivo: "
+sleep 2
+
+echo -n "Da VDS: "
+read DE
+sleep 2
+
+echo -n "Até a VDS: "
+read ATE
+sleep 2
+
+echo "O arquivo '$ORIGEM' será copiado para o diretório '$DESTINO' dentro do diretório da 'VDS$DE' até a 'VDS$ATE', confirma?"
+echo -n "Digite y ou n: "
+read CONFIRMACAO
+sleep 2
+
+if [ ! "$CONFIRMACAO" = "n" ]; then 
+
+echo "Copiando arquivos..."
+sleep 3
+
+for VAR in $(seq $DE $ATE); do
+        cp $ORIGEM /home/vds$VAR/$DESTINO
+        echo "Arquivo '$ORIGEM' copiado para '/home/vds$VAR/$DESTINO' com sucesso!"
+done
+
+else
+	echo "Cópia de arquivos abortada!"
+exit 1
+
+fi
+
+exit 0
